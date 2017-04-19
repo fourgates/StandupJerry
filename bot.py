@@ -7,7 +7,7 @@ STDERR_LOG="/tmp/modelerr.txt"
 MAXIMUM_WAITING_PERIOD=900 
 #waiting period is in seconds
 TIMEOUT_MESSAGE="This bot will now stop. There will be no more questions."
-user_arr=["anna","bob","carol channing","dave"]
+user_arr=["fourgates"]
 room="your_slack_room"
 USERS=user_arr
 ROOM=room
@@ -24,8 +24,10 @@ question_3_summary="*Blockers:* "
 TITLE_ARRAY=[opener,question_1_summary,question_2_summary,question_3_summary,closer]
 PROMPT_REMINDER="Please respond and answer the question above."
 
-sys.stdout = open(STDOUT_LOG,"w")
-sys.stderr = open(STDERR_LOG,"w")
+
+#sys.stdout = open(STDOUT_LOG,"w")
+#sys.stderr = open(STDERR_LOG,"w")
+print('start')
 
 class Bot(object):
 
@@ -130,7 +132,7 @@ robot=Bot(sc,room,user_arr,question_list,question_title)
 
 dm_id={}
 user_id={}
-
+print(robot.users)
 for person in robot.users:
   robot.user_id[person]=doc["user"][person]
   robot.dm_id[person]=doc["dm"][person]
@@ -153,4 +155,4 @@ for line in merged_answers:
   final_text+=line.decode('utf-8','ignore')+"\n"
 
 robot.speak(robot.room,final_text)
-
+print('done')
