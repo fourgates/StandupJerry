@@ -116,43 +116,52 @@ class Bot(object):
     answers_list.append(str_name)
     return answers_list[::-1]
 
+# load config
 with open(YAML_FILE, 'r') as f:
   doc = yaml.load(f)
 
+# get token and init client
 token = doc["token"]
 sc = SlackClient(token)
 
+# setup
 user_arr=USERS
 room=ROOM
 
 question_list=QUESTION_ARRAY
 question_title=TITLE_ARRAY
 
+# init bot
 robot=Bot(sc,room,user_arr,question_list,question_title)
 
+# map users onto bot
+# this may be where things are going wrong, bc there is no dm in doc
 dm_id={}
 user_id={}
-print(robot.users)
 for person in robot.users:
   robot.user_id[person]=doc["user"][person]
   robot.dm_id[person]=doc["dm"][person]
 
+# map channel onto bot 
 robot.room=doc["channel"][room]
 
+# ask users questions
 for user in robot.users:
   robot.user_response[user]=robot.asker(user)
   #comment out the line above and uncomment the line below if you want to fetch answers without asking
   #robot.user_response[user]=True
 
+# get answers from users and put them into an array
 merged_answers=[]
-
 for name in robot.users:
   result=robot.fetch(name)
   merged_answers+=result
 
+# merge array into on string
 final_text=""
 for line in merged_answers:
   final_text+=line.decode('utf-8','ignore')+"\n"
 
+# speak to room
 robot.speak(robot.room,final_text)
 print('done')
