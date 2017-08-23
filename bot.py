@@ -8,6 +8,7 @@ MAXIMUM_WAITING_PERIOD=900
 #waiting period is in seconds
 TIMEOUT_MESSAGE="This bot will now stop. There will be no more questions."
 user_arr=["fourgates"]
+#user_arr=["U4ZPK6U9G"]
 room="your_slack_room"
 USERS=user_arr
 ROOM=room
@@ -42,16 +43,25 @@ class Bot(object):
     self.dm_id={}
 
   def speak(self,speak_channel,statement):
+    print('speak')
     self.client.api_call("chat.postMessage", as_user="true", channel=speak_channel, text=statement)
 
   def get_text(self,speak_channel):
+    print('get-text')
     user_text=self.client.api_call("im.history", channel=speak_channel)
+    print('user-text')
+    print(user_text)
     return user_text
 
   def asker(self,ask_user):
     question_list=self.questions
+    # xchannel needs to be the direct message channel
+    # https://api.slack.com/types/im
     xchannel=self.dm_id[ask_user]
     xuser=self.user_id[ask_user]
+
+    print('xchannel ' + xchannel)
+    print('xuser ' + xuser)
     list_length=len(question_list)-1
     question_count=0
     self.speak(xchannel, question_list[question_count])
@@ -141,6 +151,8 @@ user_id={}
 for person in robot.users:
   robot.user_id[person]=doc["user"][person]
   robot.dm_id[person]=doc["dm"][person]
+  print('dm: ' + doc["dm"][person])
+
 
 # map channel onto bot 
 robot.room=doc["channel"][room]

@@ -1,3 +1,5 @@
+# seomething is wrong here, dm is not supposed to be the same id as the use, 
+# but this works for some reason...
 dm:
   fourgates: "U4ZPK6U9G"
 user:
@@ -6,3 +8,4 @@ channel:
   your_slack_room: "C4ZSAUVM3"
 token: "xoxb-169102232896-Akgp4do1NACeD7lQWhZrpgfC"
 
+#xoxp-169836167252-169801232322-172618052759-3bb564e074ff63e7e83f769538f38bfb
