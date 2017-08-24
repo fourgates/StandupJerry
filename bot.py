@@ -71,7 +71,7 @@ class Bot(object):
     prompt_reminder=wait_max*2/3
     while (question_count<=list_length) and (time_sleep < wait_max):
       jsoner = self.get_text(xchannel)
-      text=json.loads(jsoner)
+      text=jsoner#json.loads(jsoner)
 
       message_latest= text["messages"][0]
       muser= message_latest["user"]
@@ -156,6 +156,7 @@ for person in robot.users:
 
 # map channel onto bot 
 robot.room=doc["channel"][room]
+#robot.room="C50E0JT7G"
 
 # ask users questions
 for user in robot.users:

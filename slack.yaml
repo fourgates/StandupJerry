@@ -1,11 +1,13 @@
 # seomething is wrong here, dm is not supposed to be the same id as the use, 
 # but this works for some reason...
+#im.list https://api.slack.com/methods/im.list/test
 dm:
-  fourgates: "U4ZPK6U9G"
+  fourgates: "D50EE3FJT"
+#users.list https://api.slack.com/methods/users.list
 user:
   fourgates: "U4ZPK6U9G"
 channel:
-  your_slack_room: "C4ZSAUVM3"
+  your_slack_room: "C50E0JT7G"
 token: "xoxb-169102232896-Akgp4do1NACeD7lQWhZrpgfC"
 
 #xoxp-169836167252-169801232322-172618052759-3bb564e074ff63e7e83f769538f38bfb
