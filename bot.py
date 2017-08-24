@@ -103,7 +103,7 @@ class Bot(object):
     xuser=self.user_id[user]
     qa_list = qa_list[::-1]
     jsoner= self.get_text(xchannel)
-    raw_text=json.loads(jsoner)
+    raw_text=jsoner#json.loads(jsoner)
     start_index=0
     message_latest= raw_text["messages"][start_index]
     mtext= message_latest["text"]
