@@ -101,29 +101,36 @@ class Bot(object):
     qa_list=self.summarized_questions
     xchannel=self.dm_id[user]
     xuser=self.user_id[user]
+    # not sure what ::-1 means?
     qa_list = qa_list[::-1]
+
+    # get messages with usr
     jsoner= self.get_text(xchannel)
     raw_text=jsoner#json.loads(jsoner)
     start_index=0
     message_latest= raw_text["messages"][start_index]
     mtext= message_latest["text"]
     muser= message_latest["user"]
+    # add a bar before each persons name, this makes it stand out
     str_name= "> "+name.title()
     said_something=self.user_response[user]
+    # not sure what this is doing... maybe give a message if this person did not say anything?
     if not said_something:
       chronological_order_answer_list=[str_name,"Timeout. No answers."]
       return chronological_order_answer_list
     answers_list=[]
     cnt=0
+
     while raw_text["messages"][start_index]["text"] != qlist[1]:
       start_index+=1
+      #only grab messages from the user (not the bot)
       if raw_text["messages"][start_index]["user"]==xuser:
         uline=raw_text["messages"][start_index]["text"]
         uencode=uline.encode('utf-8')
         answer_line=qa_list[cnt+1].rstrip()+' '+uencode
         answers_list.append(answer_line)
         cnt=cnt+1
-    answers_list.append(str_name)
+    answers_list.append(  )
     return answers_list[::-1]
 
 # load config
